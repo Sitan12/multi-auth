@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register for Administrateur') }}</div>
+                <div class="card-header">{{ __('Register for Livreur') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admins.store') }}">
+                    <form method="POST" action="{{ route('livreurs.store') }}">
                         @csrf
 
                         <div class="form-group row">

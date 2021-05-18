@@ -23,7 +23,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('admins', 'App\Http\Controllers\AdminController');
+Route::resource('restos', 'App\Http\Controllers\RestaurantController');
+
+Route::resource('livreurs', 'App\Http\Controllers\LivreurController');
+
+Route::resource('clients', 'App\Http\Controllers\ClientController');
 
 Route::resource('isadmins', 'App\Http\Controllers\IsAdminController')->middleware('App\Http\Middleware\IsAdmin');
 

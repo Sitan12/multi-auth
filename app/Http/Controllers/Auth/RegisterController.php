@@ -24,11 +24,7 @@ class RegisterController extends Controller
 
     use RegistersUsers;
 
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
+    
     protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
@@ -55,10 +51,11 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'role' => 'user',
+            'role' => 'client',
             'is_admin' => 0,
             'password' => Hash::make($data['password']),
         ]);
+        
     }
    
 }

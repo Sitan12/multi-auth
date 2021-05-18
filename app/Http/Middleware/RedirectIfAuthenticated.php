@@ -30,11 +30,11 @@ class RedirectIfAuthenticated
                 } else
         
                 switch ($role) {
-                  case 'admin':
-                     return redirect('/admins');
+                  case 'resto':
+                     return redirect('/restos');
                      break;
-                  case 'user':
-                     return redirect('/home');
+                  case 'client':
+                     return redirect('/clients');
                      break; 
             
                   default:

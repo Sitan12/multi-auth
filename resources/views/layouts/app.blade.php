@@ -57,8 +57,9 @@
                                     REGISTER
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="register">
-                                    <li><a class="dropdown-item" href="{{ route('register') }}">Utilisateur</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('admins.create') }}">Administrateur</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('register') }}">Client</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('restos.create') }}">Assistant_Restaurant</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('livreurs.create') }}">Livreur</a></li>
                                 </ul>
                             </li>
                                 @endif 

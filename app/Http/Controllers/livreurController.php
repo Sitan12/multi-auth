@@ -2,27 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Admin;
-use Illuminate\Http\Request;
+use App\Models\Livreur;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use App\Providers\RouteServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
-
-class AdminController extends Controller
+class livreurController extends Controller
 {
-    use RegistersUsers;
     public function __construct()
     {
         $this->middleware('guest');
     }
-   
+
     public function index()
     {
-        return view('admins.index');
+        return view('livreurs.index');
     }
 
     /**
@@ -32,9 +27,9 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admins.create');
+        return view('livreurs.create');
     }
-  
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -49,12 +44,13 @@ class AdminController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->role = 'admin';
+        $user->role = 'livreur';
         $user->is_admin = '0';
         $user->password = Hash::make($request['password']);
         $user->save();
-        return redirect()->route('admins.index');
+        return redirect()->route('livreurs.index');
     }
+
 
 
     /**
