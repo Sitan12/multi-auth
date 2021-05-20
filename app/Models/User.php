@@ -42,4 +42,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'name';
+    }
+
+    public function profile()
+    {
+        return $this->hasOne('App\Models\Profile');
+    }
+
+    public static function getAllUsers(){
+        return User::all();
+    }
 }
