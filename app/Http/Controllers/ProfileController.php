@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Image;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use GuzzleHttp\Handler\Proxy;
@@ -19,53 +20,46 @@ class ProfileController extends Controller
         $this->middleware('auth');
     } 
 
-    // public function index()
-    // {
-    //     $user_id = Auth::user()->id;
-    //     $user = User::where(['id' => $user_id]);
-    //     $profile = Profile::where(['user_id' => $user_id]);
-    //     $users = $this->user;
-    //     return view('profiles.index', compact('profile', 'user'));
-    // }
-
     public function show(User $user)
     {
         $user_id = Auth::user()->id;
-        $profile = Profile::where(['user_id' => $user_id])->first();
-    
+        $profile = Profile::where('user_id' === $user_id );
         return view('profiles.show', compact('user'));
     }
-
-    public function create(User $user){
-       
-        return view('profiles.create', compact('user'));
-    }
-
-    public function store(Request $request,User $user){
-        $profile = new Profile();
-        $profile->numero = $request->numero;
-        $profile->adresse = $request->adresse;
-        $profile->photo = 0;
-        $profile->user_id = Auth::user()->id;
-        $profile->save();
-        return redirect()->route('profiles.show', compact('user'));
-    }  
 
     public function edit(User $user)
     {
         return view('profiles.edit', compact('user'));
     }
 
-    public function update(User $user, Request $request)
+    public function update(User $user)
     {
-        // $data = request()->validate([
-        //     'numero' => 'required',
-        //     'adresse' => 'required',
-        // ]);
+       $data = request()->validate([
+            'numero' => 'required',
+            'adresse' => 'required',
+            'photo' => 'required|mimes:png,jpg,jpeg,jfif|max:3000',
+        ]);    
 
-        // $profile->update($data);
-        $user->update($request->all());
+        if(request('photo'))
+        {
+            $photoPath = request('photo')->store('photoProfile', 'public');
+            $photo = Image::make(public_path("/storage/{$photoPath}"))->fit(800,800);
+            $photo->save();
+            // Auth()->user()->profile->update(array_merge($data, ['photo' => $photoPath]));
+        }
+
+         Auth()->user()->profile->update($data);
+        
+        $data = request()->validate([
+            'name' => 'required',
+            'email' => 'required',
+        ]);
+        
+        $user->update($data);
+        
         return redirect()->route('profiles.show', $user);
+       
+
     }
 
 }

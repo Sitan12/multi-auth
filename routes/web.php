@@ -26,14 +26,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/profiles/{user}', 'App\Http\Controllers\ProfileController@show')->name('profiles.show');
 Route::get('/profiles/{user}/edit',  'App\Http\Controllers\ProfileController@edit')->name('profiles.edit');
 Route::patch('/profiles/{user}',  'App\Http\Controllers\ProfileController@update')->name('profiles.update');
-Route::get('/profiles/{user}/create',  'App\Http\Controllers\ProfileController@create')->name('profiles.create');
-Route::post('/profiles/{user}',  'App\Http\Controllers\ProfileController@store')->name('profiles.store');
+
 
 Route::resource('restos', 'App\Http\Controllers\RestaurantController');
 
 Route::resource('livreurs', 'App\Http\Controllers\LivreurController');
 
+
 Route::resource('clients', 'App\Http\Controllers\ClientController');
+// Route::get('/clients', 'App\Http\Controllers\ClientController@profile')->name('clients.profile');
 
 Route::resource('isadmins', 'App\Http\Controllers\IsAdminController')->middleware('App\Http\Middleware\IsAdmin');
 

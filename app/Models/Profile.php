@@ -17,4 +17,10 @@ class Profile extends Model
     {
        return $this->belongsTo('App\Models\User', 'user_id');
     }
+
+    public function getImage()
+    {
+            $photoPath = $this->photo ?? 'photoProfile/default.png';
+            return "/storage/" .$photoPath;
+    }
 }
