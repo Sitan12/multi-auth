@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Livreur;
+use App\Models\ProfileLivreur;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -20,11 +21,6 @@ class livreurController extends Controller
         return view('livreurs.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('livreurs.create');
@@ -41,24 +37,23 @@ class livreurController extends Controller
 
     public function store(Request $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->role = 'livreur';
-        $user->is_admin = '0';
-        $user->password = Hash::make($request['password']);
-        $user->save();
-        return redirect()->route('livreurs.index');
+        $livreur = User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'role' => 'livreur',
+            'is_admin' => 0,
+            'password' => Hash::make($request['password']),
+        ]);
+
+         ProfileLivreur::create([
+            'livreur_id' => $livreur->id,
+            'transport' => $request['transport'],
+    
+        ]);
+
+        return $this->index();
     }
 
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //

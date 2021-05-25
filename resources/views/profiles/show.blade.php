@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
     <h1>{{ __('Mes informations') }}</h1>
         <div class="col-md-2">
-            <img src="{{ $user->profile->getImage() }}" alt="" class="ronded-circle ml-5" width="100px" >
+            <img src="/public/photoProfile/{{ $user->profile->photo }}" alt="" class="ronded-circle ml-5" width="100px" >
          </div>
          <div class="col-md-8">
                 <div>

@@ -62,8 +62,8 @@
           @if (Route::has('register'))
          
             <li><a class="dropdown-item" href="{{ route('register') }}">Client</a></li>
-            <li><a class="dropdown-item" href="{{ route('restos.create') }}">Assistant_Restaurant</a></li>
-            <li><a class="dropdown-item" href="{{ route('livreurs.create') }}">Livreur</a></li>
+            <li><a class="dropdown-item" href="{{ route('restaurant.create') }}">Assistant_Restaurant</a></li>
+            <li><a class="dropdown-item" href="{{ route('livreur.create') }}">Livreur</a></li>
             @endif
           </ul>
         </li>

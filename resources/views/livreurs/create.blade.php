@@ -5,14 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register for Livreur') }}</div>
+                <div class="card-header">{{ __('Inscription Livreur') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('livreurs.store') }}">
+                    <form method="POST" action="{{ route('livreur.store') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nom Utilisateur') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -26,12 +26,29 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        </div>
+                            <div class="form-group row">
+                            <label for="transport" class="col-md-4 col-form-label text-md-right">{{ __(' Moyen de transport') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="transport" type="text" class="form-control @error('transport') is-invalid @enderror" name="transport" required autocomplete="transport">
+                                    <option value="moto">Motos</option>
+                                    <option value="vehicule">vehicule</option>
+                                    <option value="velo">Velo</option>
+                                </select>
+                                @error('transport')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

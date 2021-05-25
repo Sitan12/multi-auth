@@ -29,7 +29,7 @@ class LoginController extends Controller
     }else {
       $role = Auth::user()->role; 
         switch ($role) {
-          case 'resto':
+          case 'restaurant':
             return view('restos.index') ;
             break;
           case 'client':

@@ -58,8 +58,8 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="register">
                                     <li><a class="dropdown-item" href="{{ route('register') }}">Client</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('restos.create') }}">Assistant_Restaurant</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('livreurs.create') }}">Livreur</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('restaurant.create') }}">Assistant_Restaurant</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('livreur.create') }}">Livreur</a></li>
                                 </ul>
                             </li>
                                 @endif 
@@ -68,11 +68,28 @@
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-                                
+                                @if( Auth::user()->role == "client" )
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                
                                 <a class="dropdown-item" href="{{ route('profiles.show', Auth::user()->name) }}">
                                         {{ __('Mon Profile') }}
                                     </a>
+                                    @endif
+                
+                                    @if( Auth::user()->role == "restaurant" )
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                
+                                <a class="dropdown-item" href="{{ route('restaurant.profile', Auth::user()->name) }}">
+                                        {{ __('Mon Profile') }}
+                                    </a>
+                                    @endif
+                                    @if( Auth::user()->role == "livreur" )
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                
+                                <a class="dropdown-item" href="{{ route('livreur.profile', Auth::user()->name) }}">
+                                        {{ __('Mon Profile') }}
+                                    </a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -82,6 +99,8 @@
                                         @csrf
                                     </form>
                                 </div>
+                               
+                                
                             </li>
                             
                         @endguest

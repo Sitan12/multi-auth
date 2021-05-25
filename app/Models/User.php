@@ -48,6 +48,16 @@ class User extends Authenticatable
         return 'name';
     }
 
+    public function profiler()
+    {
+        return $this->hasOne('App\Models\Profiler');
+    }
+
+    public function profileLivreur()
+    {
+        return $this->hasOne('App\Models\ProfileLivreur');
+    }
+
     public function profile()
     {
         return $this->hasOne('App\Models\Profile');
