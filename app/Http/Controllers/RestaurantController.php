@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Profiler;
+use App\Models\ProfileRestaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -40,9 +40,8 @@ class RestaurantController extends Controller
             'password' => Hash::make($request['password']),
         ]);
 
-         Profiler::create([
-            'restaurant_id' => $restaurant->id,
-            'categorie' => $request['categorie'],
+         ProfileRestaurant::create([
+            'user_id' => $restaurant->id,
     
         ]);
 

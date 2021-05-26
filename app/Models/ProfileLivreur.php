@@ -9,11 +9,12 @@ class ProfileLivreur extends Model
 {
     use HasFactory;
     protected $fillable =[
-        'nom', 'prenom', 'adresse', 'CNI', 'telephone', 'transport', 'livreur_id',
+        'nom', 'prenom', 'adresse', 'CNI', 'telephone', 'transport', 'user_id',
     ];
 
     public function user()
     {
-       return $this->belongsTo('App\Models\User', 'livreur_id');
+       return $this->belongsTo('App\Models\User', 'user_id');
     }
+
 }

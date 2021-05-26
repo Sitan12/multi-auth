@@ -21,16 +21,12 @@ class CreateProfileLivreursTable extends Migration
             $table->string('CNI')->nullable();
             $table->string('telephone')->nullable();
             $table->string('transport')->nullable();
-            $table->unsignedInteger('livreur_id')->index(); //definir la cle etrangere
+            $table->unsignedInteger('user_id'); //definir la cle etrangere
+            // $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('profile_livreurs');

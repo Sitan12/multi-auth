@@ -40,22 +40,6 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="categorie" class="col-md-4 col-form-label text-md-right">{{ __(' Categorie') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="categorie" type="text" class="form-control @error('categorie') is-invalid @enderror" name="categorie"  required autocomplete="categorie">
-                                    <option value="online">En ligne</option>
-                                    <option value="physique">Physique</option>
-                                </select>
-                                @error('categorie')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                       
-                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Mot de Passe') }}</label>
 
                             <div class="col-md-6">

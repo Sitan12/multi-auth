@@ -29,10 +29,12 @@ Route::patch('/profiles/{user}',  'App\Http\Controllers\ProfileController@update
 
 Route::get('/restaurant/profile/{user}', 'App\Http\Controllers\ProfileRestaurantController@show')->name('restaurant.profile');
 Route::get('/restaurant/{user}/editProfile',  'App\Http\Controllers\ProfileRestaurantController@edit')->name('restaurant.EditProfile');
+Route::patch('/restaurant/{user}',  'App\Http\Controllers\ProfileRestaurantController@update')->name('restaurant.updateProfile');
 Route::resource('restaurant', 'App\Http\Controllers\RestaurantController');
 
 Route::get('/livreur/profile/{user}', 'App\Http\Controllers\ProfileLivreurController@show')->name('livreur.profile');
 Route::get('/livreur/{user}/edit',  'App\Http\Controllers\ProfileLivreurController@edit')->name('livreur.EditProfile');
+Route::patch('/livreur/{user}',  'App\Http\Controllers\ProfileLivreurController@update')->name('livreur.updateProfile');
 Route::resource('livreur', 'App\Http\Controllers\LivreurController');
 
 

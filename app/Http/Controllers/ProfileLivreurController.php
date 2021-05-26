@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\ProfileLivreur;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -19,13 +20,42 @@ class ProfileLivreurController extends Controller
 
     public function show(User $user)
     {
+
         $user_id = Auth::user()->id;
-        $profile = ProfileLivreur::where('livreur_id' === $user_id );
-        return view('livreurs.profile', compact('user'));
+        $profiles = ProfileLivreur::has('user')->get();
+        // $profiles = ProfileLivreur::where( 'user_id' === $user_id );
+        return view('livreurs.profile', compact('user', 'profiles'));
     }
 
     public function edit(User $user)
     {
-        return view('livreurs.EditProfile', compact('user'));
+        $profiles = ProfileLivreur::has('user')->get();
+        return view('livreurs.EditProfile', compact('user', 'profiles'));
+    }
+
+    public function update(User $user)
+    {
+
+       $data = request()->validate([
+            'nom' => '',
+            'prenom' => '',
+            'telephone' => '',
+            'adresse' => '',
+            'CNI' => '',
+            'transport' => '',
+        ]);    
+        
+         Auth()->user()->profileLivreur->update($data);
+        // update for user
+        $data = request()->validate([
+            'name' => 'required',
+            'email' => 'required',
+        ]);
+        $user->update($data);
+
+        return $this->show($user);
+      
+       
+
     }
 }

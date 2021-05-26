@@ -30,7 +30,6 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -39,23 +38,6 @@
                             </div>
                         </div>
                         </div>
-                            <div class="form-group row">
-                            <label for="transport" class="col-md-4 col-form-label text-md-right">{{ __(' Moyen de transport') }}</label>
-
-                            <div class="col-md-6">
-                                <select id="transport" type="text" class="form-control @error('transport') is-invalid @enderror" name="transport" required autocomplete="transport">
-                                    <option value="moto">Motos</option>
-                                    <option value="vehicule">vehicule</option>
-                                    <option value="velo">Velo</option>
-                                </select>
-                                @error('transport')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
