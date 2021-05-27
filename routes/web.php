@@ -25,7 +25,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/profiles/{user}', 'App\Http\Controllers\ProfileController@show')->name('profiles.show');
 Route::get('/profiles/{user}/edit',  'App\Http\Controllers\ProfileController@edit')->name('profiles.edit');
-Route::patch('/profiles/{user}',  'App\Http\Controllers\ProfileController@update')->name('profiles.update');
+Route::put('/profiles/{user}',  'App\Http\Controllers\ProfileController@update')->name('profiles.update');
 
 Route::get('/restaurant/profile/{user}', 'App\Http\Controllers\ProfileRestaurantController@show')->name('restaurant.profile');
 Route::get('/restaurant/{user}/editProfile',  'App\Http\Controllers\ProfileRestaurantController@edit')->name('restaurant.EditProfile');

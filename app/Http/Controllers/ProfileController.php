@@ -37,7 +37,7 @@ class ProfileController extends Controller
        $data = request()->validate([
             'numero' => 'required',
             'adresse' => 'required',
-            'photo' => 'mimes:png,jpg,jpeg,jfif|max:3000',
+            'photo' => 'mimes:png,jpg,jpeg,jfif',
         ]);    
 
         // if(request('photo'))
@@ -53,15 +53,16 @@ class ProfileController extends Controller
         if(request()->hasFile('photo')){
             $uploadedImage = $request->file('photo');
             $imageName = time() . '.' . $uploadedImage->getClientOriginalExtension();
-            $destinationPath = public_path('/photoProfile');
+            $destinationPath = public_path('/photoProfile/');
             $uploadedImage->move($destinationPath, $imageName);
             $uploadedImage->imagePath = $destinationPath . $imageName;
+            // dd($imageName);
            
+            // $user->profile->photo = $imageName;
         }
-        // dd($imageName);
-        $user->profile->photo = $imageName;
+        Auth()->user()->profile->update(array_merge($data, ['photo' => $imageName]));
+        //  Auth()->user()->profile->update($data);
 
-         Auth()->user()->profile->update($data);
         
         $data = request()->validate([
             'name' => 'required',
