@@ -23,7 +23,6 @@ class ClientController extends Controller
         return view('auth.register');
     }
 
-   
 
 
     public function store(Request $request)

@@ -48,7 +48,7 @@
           <ul class="dropdown-menu" aria-labelledby="login">
            
             <li><a class="dropdown-item" href="{{ route('login') }}">Client</a></li>
-            <li><a class="dropdown-item" href="{{ route('login') }}">Assistant_Restaurant</a></li>
+            <li><a class="dropdown-item" href="{{ route('login') }}">Restaurant</a></li>
             <li><a class="dropdown-item" href="{{ route('login') }}">Livreur</a></li>
           
           </ul>
@@ -62,7 +62,7 @@
           @if (Route::has('register'))
          
             <li><a class="dropdown-item" href="{{ route('register') }}">Client</a></li>
-            <li><a class="dropdown-item" href="{{ route('restaurant.create') }}">Assistant_Restaurant</a></li>
+            <li><a class="dropdown-item" href="{{ route('restaurant.create') }}">Restaurant</a></li>
             <li><a class="dropdown-item" href="{{ route('livreur.create') }}">Livreur</a></li>
             @endif
           </ul>
@@ -74,6 +74,66 @@
     </div>
   </div>
 </nav>
-           </div> 
-    </body>
+          <div class="container">
+              <div class="row p-4">
+                @foreach($plats as $plat)
+                <div class="col-md-3 card p-4">
+                    <img src="/imagePlats/{{ $plat->image }}" alt="" class="mb-3">
+                    <h4>{{ $plat->titre }}</h4>
+                    <p>{{ $plat->description }}</p>
+                    <p>{{ $plat->prix }} F CFA</p>
+                    <h5>#{{$plat->user->name}}</h5>
+                      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal{{$plat->id}}">
+                       Commander</button>
+                </div>
+                @endforeach
+              </div>
+              @foreach($plats as $plat)
+<!-- Modal -->
+<div class="modal fade" id="exampleModal{{$plat->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmer votre commande</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="{{ route('commande.add') }}" enctype="multipart/form-data">
+                        @csrf
+              @method('POST')
+             <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Titre</th>
+                  <th scope="col">Prix</th>
+                  <th scope="col">Image</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr>
+              <td></td>
+                <td>{{ $plat->titre }}</td>
+                <td>{{ $plat->prix }} F CFA</td>
+                <td><img src="/imagePlats/{{ $plat->image }}" alt="" class="ronded-circle" width="50%"></td>  
+              </tr>
+              </tbody>
+            </table>
+            <input id="plat_id" type="hidden"  name="plat_id" value="{{ $plat->id }}">
+          <input id="restaurant_id" type="hidden"  name="restaurant_id" value="{{ $plat->user_id }}" >
+          
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-primary"> {{ __('Valider') }} </button>
+          </div>
+          
+
+      </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+@endforeach
+ </div>
+ </body>
 </html>

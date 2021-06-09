@@ -39,16 +39,6 @@ class ProfileController extends Controller
             'adresse' => 'required',
             'photo' => 'mimes:png,jpg,jpeg,jfif',
         ]);    
-
-        // if(request('photo'))
-        // {
-        //     $photoPath = request('photo')->store('photoProfile', 'public');
-        //     $photo = Image::make(public_path("/storage/{$photoPath}"))->fit(800,800);
-        //     dd($photoPath);
-        //     $photo->save();
-        //     // Auth()->user()->profile->update(array_merge($data, ['photo' => $photoPath]));
-        // }
-
         $imageName = null;
         if(request()->hasFile('photo')){
             $uploadedImage = $request->file('photo');

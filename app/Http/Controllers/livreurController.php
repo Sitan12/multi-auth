@@ -47,10 +47,9 @@ class livreurController extends Controller
 
          ProfileLivreur::create([
             'user_id' => $livreur->id,
-    
         ]);
 
-        return $this->index();
+        return redirect('login');
     }
 
     public function show($id)

@@ -11,4 +11,5 @@ class Restaurant extends Model
     protected $fillable =[
         'name', 'email', 'role', 'is_admin', 'password',
     ];
+    
 }

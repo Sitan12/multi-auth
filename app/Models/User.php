@@ -63,6 +63,20 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Profile');
     }
 
+    public function plat()
+    {
+        return $this->hasMany('App\Models\Plats');
+    }
+    public function commande()
+    {
+        return $this->hasMany('App\Models\Commande');
+    }
+
+    public function notification()
+    {
+        return $this->hasMany('App\Models\Notifications');
+    }
+
     public static function getAllUsers(){
         return User::all();
     }

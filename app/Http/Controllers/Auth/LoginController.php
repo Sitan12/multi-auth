@@ -14,8 +14,8 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    
  public function login(Request $request){
+
   $input = $request->all();
   $this->validate($request,[
     'email' =>'required|email',
@@ -23,28 +23,36 @@ class LoginController extends Controller
   ]);
 
   if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-  {
-    if (auth()->user()->is_admin == 1){
-      return view('isadmins.index');
-    }else {
-      $role = Auth::user()->role; 
-        switch ($role) {
-          case 'restaurant':
-            return view('restos.index') ;
+    {
+
+      if (auth()->user()->is_admin == 1)
+      {
+        return view('isadmins.index');
+      } else 
+      {
+        $role = Auth::user()->role; 
+          switch ($role) 
+          {
+            case 'restaurant':
+              return redirect('restaurant') ;
+              break;
+            case 'client':
+              return redirect('/');
+              break;
+              case 'livreur':
+                return redirect('livreur'); 
             break;
-          case 'client':
-            return view('clients.index');
-            break;
-            case 'livreur':
-              return view('livreurs.index');
-              break; 
-          default:
-            return '/home'; 
-          break;
-        }
-    }
-  } 
-}
+            default:
+            return redirect('home');
+             break; 
+          }
+      }
+    } 
+    else 
+    notify()->error("Email ou Mot de Passe incorrect");
+    return redirect('login');
+    
+  }
   
     public function __construct()
     {
